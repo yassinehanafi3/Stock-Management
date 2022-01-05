@@ -11,7 +11,10 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     min: dbConfig.pool.min,
     acquire: dbConfig.pool.acquire,
     idle: dbConfig.pool.idle
-  }
+  },
+  define: {
+    freezeTableName: true
+  },
 });
 
 const db = {};
@@ -20,6 +23,7 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.client = require("./client.model.js")(sequelize, Sequelize);
+db.fournisseur = require("./fournisseur.model.js")(sequelize, Sequelize);
 
 
 module.exports = db;

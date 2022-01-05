@@ -1,17 +1,41 @@
 module.exports = (sequelize, Sequelize) => {
-  const Client = sequelize.define("client", {
-    id : {
+  const emailRegexp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+  const Client = sequelize.define("clients", {
+    Code_Client : {
       type : Number,
       required: true,
       primaryKey: true,
+      autoIncrement : true,
     },
-    name: {
+    Nom_Client: {
       type: String,
       required: true,
     },
-    pays: {
+    adresse_facturation: {
       type: String,
       required: true,
+    },
+    adresse_livraison: {
+      type: String,
+      required: false,
+    },
+    telephone_client: {
+      type: String,
+      required: true,
+    },
+    pays_client: {
+      type: String,
+      required: true,
+    },
+    ville_client: {
+      type: String,
+      required: true,
+    },
+    email_client: {
+      type: String,
+      required: true,
+      unique : true,
+      validate : {isEmail: true},
     },
     createdAt : {
       type : Date,

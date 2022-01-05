@@ -6,7 +6,7 @@ const app = express();
 
 
 require("./routes/client.route.js")(app);
-require("./routes/home.route.js")(app);
+require("./routes/fournisseur.route.js")(app);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {

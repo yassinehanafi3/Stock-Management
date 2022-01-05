@@ -4,8 +4,9 @@ module.exports = app => {
     var router = require("express").Router();
   
     router.post("/addclient", client.create);
-    router.delete("/removeclient", client.delete);
+    router.delete("/removeclient/:Id", client.delete);
     router.get("/allclients", client.findAll);
+    router.get("/allclients/:Id", client.findByPk);
 
   
     app.use('/api', router);

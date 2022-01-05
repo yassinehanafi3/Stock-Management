@@ -8,17 +8,14 @@ exports.create = (req, res) => {
     });
     return;
   }
-
   const client = {
-    id: req.query.id,
-    name: req.query.name,
-    /*email: req.body.email,
-    telephone: req.body.telephone,*/
-    pays: req.query.pays,
-    /*ville: req.body.ville,
-    Adresse_facturation: req.body.Adresse_facturation,
-    adresse_livraison: req.body.adresse_livraison,
-    date: req.body.date,*/
+    Nom_Client: req.query.name,
+    email_client: req.query.email,
+    telephone_client: req.query.telephone,
+    pays_client: req.query.pays,
+    ville_client: req.query.ville,
+    adresse_facturation: req.query.adresse_facturation,
+    adresse_livraison: req.query.adresse_livraison,
   };
 
   Client.create(client)
@@ -28,15 +25,15 @@ exports.create = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the client."
+          err.errors[0].message || "Some error occurred while creating the client."
       });
     });
 };
 
 exports.delete = (req, res) => {
-  const id = req.query.id;
+  const id = req.params.Id;
   Client.destroy({
-    where: { id: id }
+    where: { code_client: id }
   })
     .then(num => {
       if (num == 1) {
@@ -60,12 +57,36 @@ exports.findAll = (req, res) => {
 
   // conditions can be added to findAll({where : condition})
   Client.findAll({}).then(data => {
-    res.send(data);
+    if(data != null){
+      res.send(data);
+    }
+    else res.status(400).send({
+      message : "Table is clear!"
+      
+    })
   })
   .catch(err => {
     res.status(500).send({
       message:
-        err.message || "Some error occurred while retrieving clients."
+      err.errors[0].message || "Some error occurred while retrieving clients."
     });
   });
+}
+
+exports.findByPk = (req, res) => {
+  Client.findByPk(req.params.Id).then(data => {
+    if(data != null){
+      res.send(data);
+    }
+    else res.status(400).send({
+      message : "Client not found!"
+      
+    })
+  })
+  .catch( err => {
+    res.status(400).send({
+      message : "Client not found!"
+      
+    })
+  })
 }
