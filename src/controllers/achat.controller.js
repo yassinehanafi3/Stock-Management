@@ -63,3 +63,40 @@ exports.create = async (req, res) => {
           });
     });
 };
+
+exports.findAll = (req, res) => {
+
+  Achat.findAll({}).then(data => {
+    if(data != null){
+      res.send(data);
+    }
+    else res.status(400).send({
+      message : "Table is clear!"
+      
+    })
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+      err.name || "Some error occurred while retrieving achats."
+    });
+  });
+}
+
+exports.findByNumeroStock = (req, res) => {
+  Achat.findAll({where : {N_Stock : req.params.Id}}).then(data => {
+    if(data != null){
+      res.send(data);
+    }
+    else res.status(400).send({
+      message : "Article was never bought"
+      
+    })
+  })
+  .catch( err => {
+    res.status(400).send({
+      message : "Article was never bought"
+      
+    })
+  })
+}

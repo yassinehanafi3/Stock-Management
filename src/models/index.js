@@ -33,7 +33,7 @@ db.categorie = require("./categorie.model.js")(sequelize, Sequelize);
 // Achat
 //db.stock.hasMany(db.achat);
 //db.achat.belongsTo(db.stock);
-db.fournisseur.hasMany(db.achat);
+db.achat.hasMany(db.fournisseur);
 //db.achat.belongsTo(db.fournisseur);
 
 // Vente

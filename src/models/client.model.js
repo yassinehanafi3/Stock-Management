@@ -30,6 +30,7 @@ module.exports = (sequelize, Sequelize) => {
     ville_client: {
       type: String,
       required: true,
+      unique : false,
     },
     email_client: {
       type: String,

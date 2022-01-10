@@ -1,5 +1,6 @@
 const db = require("../models");
 const Client = db.client;
+const path = require('path');
 
 exports.create = (req, res) => {
   if (!req.query.name) {
@@ -89,4 +90,8 @@ exports.findByPk = (req, res) => {
       
     })
   })
+}
+
+exports.renderHTML = (req, res) => {
+  res.sendFile(path.join(__dirname,"..","templates","clients.html"));
 }
