@@ -1,6 +1,6 @@
 const db = require("../models");
 //const Admin = db.admin;
-//const path = require('path');
+const path = require('path');
 //const bcrypt = require("bcrypt");
 //const saltRounds = 10; 
 
@@ -9,6 +9,9 @@ const db = require("../models");
 exports.login = async (req, res) => {
   res.redirect("/clients");
 };
+exports.renderHtml = (req, res) => {
+  res.render("admin");
+}
 /*
 exports.create = async (req, res) => {
   const admin = {

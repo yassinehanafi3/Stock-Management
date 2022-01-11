@@ -3,30 +3,56 @@ const Client = db.client;
 const path = require('path');
 
 exports.create = (req, res) => {
-  if (!req.query.name) {
+  console.log(req.body);
+  if (!req.body.name) {
     res.status(400).send({
       message: "Content can not be empty!"
     });
     return;
   }
   const client = {
-    Nom_Client: req.query.name,
-    email_client: req.query.email,
-    telephone_client: req.query.telephone,
-    pays_client: req.query.pays,
-    ville_client: req.query.ville,
-    adresse_facturation: req.query.adresse_facturation,
-    adresse_livraison: req.query.adresse_livraison,
+    Nom_Client: req.body.name,
+    email_client: req.body.email,
+    telephone_client: req.body.telephone,
+    pays_client: req.body.pays,
+    ville_client: req.body.ville,
+    adresse_facturation: req.body.adresse_facturation,
+    adresse_livraison: req.body.adresse_livraison,
   };
 
   Client.create(client)
     .then(data => {
-      res.send(data);
+      res.redirect("/clients");
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).send({
+        message:
+          err || "Some error occurred while creating the client."
+      });
+    });
+};
+
+exports.update = (req, res) => {
+  const id = req.params.Id;
+  console.log(req.query);
+  Client.update(req.query, {
+    where: { id: id }
+  })
+    .then(data => {
+      if (data) {
+        res.send({
+          message: "Client was updated successfully."
+        });
+      } else {
+        res.send({
+          message: `Cannot update Client with id=${id}. Maybe Client was not found or req.body is empty!`
+        });
+      }
     })
     .catch(err => {
       res.status(500).send({
-        message:
-          err.errors[0].message || "Some error occurred while creating the client."
+        message: "Error updating Client with id=" + id
       });
     });
 };
@@ -57,9 +83,10 @@ exports.delete = (req, res) => {
 exports.findAll = (req, res) => {
 
   // conditions can be added to findAll({where : condition})
-  Client.findAll({}).then(data => {
+  Client.findAll({raw: true}).then(data => {
     if(data != null){
-      res.send(data);
+      data = {data}
+      res.render("clients",data);
     }
     else res.status(400).send({
       message : "Table is clear!"
@@ -68,8 +95,7 @@ exports.findAll = (req, res) => {
   })
   .catch(err => {
     res.status(500).send({
-      message:
-      err.errors[0].message || "Some error occurred while retrieving clients."
+      message: "Some error occurred while retrieving clients."
     });
   });
 }
@@ -90,8 +116,4 @@ exports.findByPk = (req, res) => {
       
     })
   })
-}
-
-exports.renderHTML = (req, res) => {
-  res.sendFile(path.join(__dirname,"..","templates","clients.html"));
 }

@@ -53,10 +53,9 @@ exports.delete = (req, res) => {
 
 exports.findAll = (req, res) => {
 
-  // conditions can be added to findAll({where : condition})
   Fournisseur.findAll({}).then(data => {
-    res.send(data);
-      
+    data = {data}
+    res.render("fournisseurs",data);
   })
   .catch(err => {
     res.status(500).send({

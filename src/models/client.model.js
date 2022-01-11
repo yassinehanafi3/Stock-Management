@@ -26,6 +26,7 @@ module.exports = (sequelize, Sequelize) => {
     pays_client: {
       type: String,
       required: true,
+      unique : false
     },
     ville_client: {
       type: String,

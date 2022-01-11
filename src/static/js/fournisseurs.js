@@ -23,7 +23,7 @@ $.delete = function (url, data, callback, type) {
 }
 $(".delete-btn").onclick(function (this) {
 	alert(this.id);
-	/*$.delete("/removeclient/" + this.Code_Client,
+	/*$.delete("/removefournisseur/" + this.Code_Client,
 		function (this) {
 			console.log(this.message);
 			if (this.message = "Client was deleted successfully!") window.location.replace("/clients");

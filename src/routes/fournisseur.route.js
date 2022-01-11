@@ -5,9 +5,9 @@ module.exports = app => {
   
     router.post("/addfournisseur", fournisseur.create);
     router.delete("/removefournisseur/:Id", fournisseur.delete);
-    router.get("/allfournisseurs", fournisseur.findAll);
+    router.get("/fournisseurs", fournisseur.findAll);
     router.get("/allfournisseurs/:Id", fournisseur.findByPk);
 
   
-    app.use('/api', router);
+    app.use('/', router);
   };

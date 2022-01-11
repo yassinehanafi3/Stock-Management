@@ -5,9 +5,10 @@ module.exports = app => {
   
     router.post("/addclient", client.create);
     router.delete("/removeclient/:Id", client.delete);
-    router.get("/allclients", client.findAll);
+    router.get("/clients", client.findAll);
     router.get("/allclients/:Id", client.findByPk);
-    router.get("/clients",client.renderHTML)
+    //router.get("/clients",client.renderHTML);
+    router.put("/updateclient/:Id", client.update)
   
     app.use('/', router);
   };
