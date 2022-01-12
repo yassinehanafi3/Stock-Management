@@ -1,24 +1,26 @@
+const flash = require("express-flash");
 const db = require("../models");
 const Fournisseur = db.fournisseur;
 
 exports.create = (req, res) => {
-  if (!req.query.societe) {
+  if (!req.body.societe) {
     res.status(400).send({
       message: "Content can not be empty!"
     });
     return;
   }
   const fournisseur = {
-    Societe_fournisseur: req.query.societe,
-    contact_fournisseur: req.query.contact,
-    adresse_fournisseur: req.query.adresse,
-    telephone_fournisseur: req.query.telephone,
-    email_fournisseur: req.query.email,
+    Societe_fournisseur: req.body.societe,
+    contact_fournisseur: req.body.contact,
+    adresse_fournisseur: req.body.adresse,
+    telephone_fournisseur: req.body.telephone,
+    email_fournisseur: req.body.email,
   };
 
   Fournisseur.create(fournisseur)
     .then(data => {
-      res.send(data);
+      //req.flash("message","Client added");
+      res.redirect("/fournisseurs");
     })
     .catch(err => {
       res.status(500).send({
@@ -52,33 +54,38 @@ exports.delete = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-
-  Fournisseur.findAll({}).then(data => {
-    data = {data}
-    res.render("fournisseurs",data);
-  })
-  .catch(err => {
-    res.status(500).send({
-      message:
-      err.message || "Some error occurred while retrieving fournisseurs."
-    });
-  });
+  if (req.isAuthenticated()) {
+    console.log("authentified");
+    Fournisseur.findAll({}).then(data => {
+      data = { data }
+      res.render("fournisseurs", data);
+    })
+      .catch(err => {
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while retrieving fournisseurs."
+        });
+      });
+  } else {
+    console.log(`No one is logged in`)
+    res.redirect('admin')
+  }
 }
 
 exports.findByPk = (req, res) => {
-    Fournisseur.findByPk(req.params.Id).then(data => {
-    if(data != null){
+  Fournisseur.findByPk(req.params.Id).then(data => {
+    if (data != null) {
       res.send(data);
     }
     else res.send({
-      message : "Fournisseur not found!"
-      
+      message: "Fournisseur not found!"
+
     })
   })
-  .catch( err => {
-    res.status(400).send({
-      message : "Fournisseur not found!"
-      
+    .catch(err => {
+      res.status(400).send({
+        message: "Fournisseur not found!"
+
+      })
     })
-  })
 }

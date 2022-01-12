@@ -33,14 +33,30 @@ db.categorie = require("./categorie.model.js")(sequelize, Sequelize);
 // Achat
 //db.stock.hasMany(db.achat);
 //db.achat.belongsTo(db.stock);
-db.fournisseur.hasMany(db.achat);
-//db.achat.belongsTo(db.fournisseur);
+db.fournisseur.hasMany(db.achat,{
+  foreignKey: {
+    name: 'Code_fournisseur'
+  }
+});
+db.achat.belongsTo(db.fournisseur,{
+  foreignKey: {
+    name: 'id_Achat'
+  }
+});
 
 // Vente
 //db.stock.hasMany(db.vente);
 //db.vente.belongsTo(db.stock);
-db.client.hasMany(db.vente);
-//db.vente.belongsTo(db.client);
+db.client.hasMany(db.vente,{
+  foreignKey: {
+    name: 'Code_Client'
+  }
+});
+db.vente.belongsTo(db.client,{
+  foreignKey: {
+    name: 'Id_Vente'
+  }
+});
 
 // Stock
 db.admin.hasMany(db.stock, {
@@ -48,16 +64,17 @@ db.admin.hasMany(db.stock, {
     name: 'id_admin'
   }
 });
-/*db.stock.belongsTo(db.admin,{
+db.stock.belongsTo(db.admin,{
   foreignKey: {
-    name: 'id_admin'
+    name: 'N_Stock'
   }
-});*/
+});
 db.categorie.hasMany(db.stock, {
   foreignKey: {
     name: 'id_categorie'
   }
 });
+
 /*db.stock.belongsTo(db.categorie, {
   foreignKey: {
     name: 'id_categorie'

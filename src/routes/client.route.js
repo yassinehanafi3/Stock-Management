@@ -7,7 +7,6 @@ module.exports = app => {
     router.delete("/removeclient/:Id", client.delete);
     router.get("/clients", client.findAll);
     router.get("/allclients/:Id", client.findByPk);
-    //router.get("/clients",client.renderHTML);
     router.put("/updateclient/:Id", client.update)
   
     app.use('/', router);

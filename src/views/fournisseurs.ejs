@@ -10,8 +10,8 @@
         content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
     <meta name="description" content="Tables are the backbone of almost all web applications.">
     <meta name="msapplication-tap-highlight" content="no">
-    <link href="/static/css/main.css" rel="stylesheet">
-    <link href="/static/css/clients.css" rel="stylesheet">
+    <link href="../static/css/main.css" rel="stylesheet">
+    <link href="../static/css/fournisseurs.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
         integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -19,10 +19,11 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 
-    <script src="../static/js/clients.js"></script>
+    <script src="../static/js/fournisseurs.js"></script>
 </head>
 
 <body>
+    
     <div class="app-container">
         <%- include('./partials/header.ejs') %>
         <div class="app-main">
@@ -33,10 +34,10 @@
                         <div class="page-title-wrapper">
                             <div class="page-title-heading">
                                 <div class="page-title-icon">
-                                    <i class="fas fa-user"></i>
+                                    <i class="fas fa-box"></i>
                                 </div>
-                                <div>Clients
-                                    <div class="page-title-subheading">La liste des clients.
+                                <div>Fournisseurs
+                                    <div class="page-title-subheading">La liste des fournisseurs.
                                     </div>
                                 </div>
                             </div>
@@ -48,9 +49,9 @@
                                 <div class="card-body">
                                     <div class="card-title">
                                         <div style="font-size: 30px;" class="row">
-                                            <div class="col-lg-6">Clients</div>
+                                            <div class="col-lg-6">Fournisseurs</div>
                                             <div class="col-lg-6">
-                                                <div onclick="showForm()" class="addClientButton"><i
+                                                <div data-toggle="modal" data-target="#myModal" class="addClientButton"><i
                                                         style="float:right;margin-right: 30px;" class="fas fa-plus"></i>
                                                 </div>
                                             </div>
@@ -110,41 +111,35 @@
                 </div>
             </div>
         </div>
-        <div class="modal" tabindex="-1" role="dialog">
+        <div id="myModal" class="modal" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <form action="/addclient" method="post" style="max-width:500px;margin:auto">
+                    <form action="/addfournisseur" method="post" style="width:100%;margin:auto">
                         <div class="modal-body">
-                            <h2>Client information</h2>
+                            <h2>Fournisseur information</h2>
                             <hr>
                             <div class="input-container">
-                                <input class="input-field" type="text" placeholder="Nom client..." name="name">
+                                <input class="input-field" type="text" placeholder="Societe" name="societe">
                             </div>
     
                             <div class="input-container">
-                                <input class="input-field" type="text" placeholder="Email client..." name="email">
+                                <input class="input-field" type="text" placeholder="Contact" name="contact">
                             </div>
     
                             <div class="input-container">
-                                <input class="input-field" type="text" placeholder="Telephone client..." name="telephone">
+                                <input class="input-field" type="text" placeholder="Telephone" name="telephone">
+                            </div>
+                            <div class="input-container">
+                                <input class="input-field" type="text" placeholder="Email" name="email">
                             </div>
     
                             <div class="input-container">
-                                <input class="input-field" type="text" placeholder="Adresse facturation..."
-                                    name="adresse_facturation">
-                            </div>
-                            <div class="input-container">
-                                <input class="input-field" type="text" placeholder="Adresse livraison..."
-                                    name="adresse_livraison">
-                            </div>
-                            <div class="input-container">
-                                <input class="input-field" type="text" placeholder="Pays" name="pays">
-                                &nbsp;&nbsp;
-                                <input class="input-field" type="text" placeholder="Ville" name="ville">
+                                <input class="input-field" type="text" placeholder="adresse"
+                                    name="adresse">
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button id="SaveClient" type="submit" class="btn btn-primary">Save changes</button>
+                            <button id="SaveFournisseur" type="submit" class="btn btn-primary">Save changes</button>
                             <button onclick="CloseModal()" type="button" class="btn btn-secondary"
                                 data-dismiss="modal">Close</button>
                         </div>
@@ -157,6 +152,5 @@
     </div>
     
 </body>
-
 
 </html>

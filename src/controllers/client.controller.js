@@ -22,14 +22,15 @@ exports.create = (req, res) => {
 
   Client.create(client)
     .then(data => {
+      req.flash("success","Client added");
       res.redirect("/clients");
     })
     .catch(err => {
       console.log(err);
-      res.status(500).send({
-        message:
-          err || "Some error occurred while creating the client."
-      });
+      req.flash("error","Some error occurred while creating the client.");
+      /*res.status(500).send({
+        
+      });*/
     });
 };
 
@@ -81,23 +82,29 @@ exports.delete = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-
+		if (req.isAuthenticated()) {
+      console.log("authentified");
+			Client.findAll({raw: true}).then(data => {
+        if(data != null){
+          data = {data}
+          res.render("clients",data);
+        }
+        else res.status(400).send({
+          message : "Table is clear!"
+          
+        })
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: "Some error occurred while retrieving clients."
+        });
+      });
+		} else {
+			console.log(`No one is logged in`)
+			res.redirect('admin')
+		}
   // conditions can be added to findAll({where : condition})
-  Client.findAll({raw: true}).then(data => {
-    if(data != null){
-      data = {data}
-      res.render("clients",data);
-    }
-    else res.status(400).send({
-      message : "Table is clear!"
-      
-    })
-  })
-  .catch(err => {
-    res.status(500).send({
-      message: "Some error occurred while retrieving clients."
-    });
-  });
+  
 }
 
 exports.findByPk = (req, res) => {

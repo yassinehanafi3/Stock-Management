@@ -8,10 +8,9 @@
     <title>Clients</title>
     <meta name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
-    <meta name="description" content="Tables are the backbone of almost all web applications.">
     <meta name="msapplication-tap-highlight" content="no">
-    <link href="/static/css/main.css" rel="stylesheet">
-    <link href="/static/css/clients.css" rel="stylesheet">
+    <link href="../static/css/main.css" rel="stylesheet">
+    <link href="../static/css/clients.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
         integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -50,7 +49,7 @@
                                         <div style="font-size: 30px;" class="row">
                                             <div class="col-lg-6">Clients</div>
                                             <div class="col-lg-6">
-                                                <div onclick="showForm()" class="addClientButton"><i
+                                                <div data-toggle="modal" data-target="#myModal" type="button" class="addClientButton"><i
                                                         style="float:right;margin-right: 30px;" class="fas fa-plus"></i>
                                                 </div>
                                             </div>
@@ -92,6 +91,7 @@
                                                     <td style="text-align:center;">
                                                         <div class='delete-btn' id="<%-data[i].Code_Client%>">
                                                             <i class='fa fa-trash' aria-hidden='true'></i>
+                                                            <i class="fas fa-edit" aria-hidden='true'></i>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -106,10 +106,10 @@
                 </div>
             </div>
         </div>
-        <div class="modal" tabindex="-1" role="dialog">
+        <div id="myModal" class="modal" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <form action="/addclient" method="post" style="max-width:500px;margin:auto">
+                    <form action="/addclient" method="post" style="width:100%;margin:auto">
                         <div class="modal-body">
                             <h2>Client information</h2>
                             <hr>

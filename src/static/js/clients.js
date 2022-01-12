@@ -1,31 +1,27 @@
-function showForm() {
-	$(".modal").css("display", "block");
-}
-function CloseModal() {
-	$(".modal").css("display", "none");
-}
+window.onload = 
+	
 
-$.delete = function (url, data, callback, type) {
+	$.delete = function (url, data, callback, type) {
 
-	if ($.isFunction(data)) {
-		type = type || callback,
-			callback = data,
-			data = {}
+		if ($.isFunction(data)) {
+			type = type || callback,
+				callback = data,
+				data = {}
+		}
+
+		return $.ajax({
+			url: url,
+			type: 'DELETE',
+			success: callback,
+			data: data,
+			contentType: type
+		});
 	}
-
-	return $.ajax({
-		url: url,
-		type: 'DELETE',
-		success: callback,
-		data: data,
-		contentType: type
-	});
-}
-$(".delete-btn").onclick(function (this) {
-	alert(this.id);
-	/*$.delete("/removeclient/" + this.Code_Client,
-		function (this) {
-			console.log(this.message);
-			if (this.message = "Client was deleted successfully!") window.location.replace("/clients");
-		});*/
-})
+	$(".delete-btn").onclick(function (this) {
+		alert(this.id);
+		/*$.delete("/removeclient/" + this.Code_Client,
+			function (this) {
+				console.log(this.message);
+				if (this.message = "Client was deleted successfully!") window.location.replace("/clients");
+			});*/
+	})

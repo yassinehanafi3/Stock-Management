@@ -3,12 +3,24 @@ const db = require("./src/models");
 const path = require("path");
 const passport = require("passport");
 const bodyParser = require('body-parser');
+var flash = require('express-flash');
+var session = require('express-session');
+
+
+
 
 
 const app = express();
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
+
+app.use(session({ cookie: { maxAge: 60000 }, 
+  secret: 'woot',
+  resave: false, 
+  saveUninitialized: false}));
+app.use(flash());
 app.use(passport.initialize());
+app.use(passport.session());
 
 app.set('view engine','ejs');
 app.set('views',path.join(__dirname,"src","views"));

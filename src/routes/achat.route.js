@@ -4,8 +4,8 @@ module.exports = app => {
     var router = require("express").Router();
   
     router.post("/addachat", achat.create);
-    router.get("/getachat", achat.findAll);
+    router.get("/achats", achat.findAll);
     router.get("/getachat/article/:Id", achat.findByNumeroStock);
   
-    app.use('/api', router);
+    app.use('/', router);
   };

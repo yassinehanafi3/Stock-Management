@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Tawajooh - Admin</title>
+    <title>Admin</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -31,6 +31,13 @@
                                 <i onclick="showhidepassword()" class="fa fa-eye" id="eye" aria-hidden="true"></i>
                             </div>
                         </div>
+                        <% if (messages.error) { %>
+                        <div class="form-group">
+                            <center>
+                                <small style="color: red;">Mot de passe Ou Username Incorrect</small>
+                            </center>
+                        </div>
+                        <% } %>
                         <div class="form-group">
                             <button id="btn_login" type="submit" class="btn btn-lg btn-block text-center text-lg-start">Sign In</button>
                         </div>

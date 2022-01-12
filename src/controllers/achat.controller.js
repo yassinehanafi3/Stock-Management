@@ -65,10 +65,11 @@ exports.create = async (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-
+  if (req.isAuthenticated()) {
+    console.log("authentified");
   Achat.findAll({}).then(data => {
     if(data != null){
-      res.send(data);
+      res.render("achats",data);
     }
     else res.status(400).send({
       message : "Table is clear!"
@@ -81,6 +82,10 @@ exports.findAll = (req, res) => {
       err.name || "Some error occurred while retrieving achats."
     });
   });
+}else {
+  console.log(`No one is logged in`)
+  res.redirect('admin')
+}
 }
 
 exports.findByNumeroStock = (req, res) => {

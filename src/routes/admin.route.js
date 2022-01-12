@@ -4,7 +4,11 @@ module.exports = app => {
   
     var router = require("express").Router();
   
-    router.post("/login",passport.authenticate('local') ,admin.login);
+    router.post("/login",passport.authenticate('local', {
+      successRedirect: '/clients',
+      failureRedirect: '/admin',
+      failureFlash: true 
+    }), admin.login);
     //router.post("/createAdmin",admin.create);
     router.get("/admin", admin.renderHtml);
 

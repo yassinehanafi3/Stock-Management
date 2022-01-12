@@ -1,9 +1,3 @@
-function showForm() {
-	$(".modal").css("display", "block");
-}
-function CloseModal() {
-	$(".modal").css("display", "none");
-}
 
 $.delete = function (url, data, callback, type) {
 
