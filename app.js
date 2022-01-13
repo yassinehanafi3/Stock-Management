@@ -7,9 +7,6 @@ var flash = require('express-flash');
 var session = require('express-session');
 
 
-
-
-
 const app = express();
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
@@ -33,6 +30,7 @@ require("./src/routes/admin.route.js")(app);
 require("./src/routes/home.route.js")(app);
 require("./src/routes/achat.route.js")(app);
 require("./auth/passport.js");
+require("./src/routes/dashboard.route.js")(app);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {

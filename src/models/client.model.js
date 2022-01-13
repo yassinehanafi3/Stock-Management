@@ -14,14 +14,23 @@ module.exports = (sequelize, Sequelize) => {
     adresse_facturation: {
       type: String,
       required: true,
+      unique :{
+        args: true,
+        msg: "Invalid adresse",
+        },
     },
     adresse_livraison: {
       type: String,
       required: false,
+      
     },
     telephone_client: {
       type: String,
       required: true,
+      unique :{
+        args: true,
+        msg: "Invalid phone number",
+        },
     },
     pays_client: {
       type: String,
@@ -37,7 +46,12 @@ module.exports = (sequelize, Sequelize) => {
       type: String,
       required: true,
       unique : true,
-      validate : {isEmail: true},
+      validate : {isEmail: 
+        {
+        args: true,
+        msg: "Invalid email format",
+        }
+      }
     },
     createdAt : {
       type : Date,

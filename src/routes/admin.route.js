@@ -11,6 +11,7 @@ module.exports = app => {
     }), admin.login);
     //router.post("/createAdmin",admin.create);
     router.get("/admin", admin.renderHtml);
+    router.post('/logout', admin.logout);
 
   
     app.use('/', router);

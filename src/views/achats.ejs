@@ -1,1 +1,173 @@
-HEEEEEEEEEEEEY
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title><%= data.page_title  %></title>
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+    <meta name="msapplication-tap-highlight" content="no">
+    <link href="../static/css/main.css" rel="stylesheet">
+    <link href="../static/css/achats.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <div class="app-container">
+        <%- include('./partials/header.ejs') %>
+        <div class="app-main">
+            <%- include('./partials/sidebar.ejs') %>
+            <div class="app-main__outer">
+                <div class="app-main__inner">
+                    <div class="app-page-title">
+                        <div class="page-title-wrapper">
+                            <div class="page-title-heading">
+                                <div class="page-title-icon">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </div>
+                                <div>Achats
+                                    <div class="page-title-subheading">La liste des achats.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-form-achat" style="margin:20px">
+                        <form action="/addachat" method="POST" style="width:100%;margin:auto">
+                            <h4>Achat information</h4><br>
+                            <div class="row">
+                                
+                                <div class="col-lg-6">
+                                    <div class="input-container">
+                                        <input class="form-control" type="text" placeholder="Numero Stock" id="N_Stock" name="N_Stock">
+                                    </div>
+            
+                                    
+                                    <div class="input-container">
+                                        <input class="form-control" type="text" placeholder="TVA" id="TVA_Achat" name="TVA_Achat">
+                                    </div>
+
+                                    <div class="input-container">
+                                        <input class="form-control" type="text" placeholder="Prix unité" id="prix" name="prix">
+                                    </div>
+                                    
+            
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="input-container">
+                                        <input class="form-control" type="text" placeholder="Quantité"
+                                        id="Quantite_Achat" name="Quantite_Achat">
+                                    </div>
+                                    <div class="input-container">
+                                        <input class="form-control" type="text" placeholder="Remise" id="Remise_Achat" name="Remise_Achat">
+                                    </div>
+                                </div>
+                            
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="input-container">
+                                        <input class="form-control" type="text" placeholder="Categorie" id="Categorie" name="Categorie">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="input-container">
+                                        <input class="form-control" type="text" placeholder="Fournisseur" id="fournisseur" name="fournisseur">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                <button type="submit" class="save-btn btn btn-primary">Save</button>
+                            </div>
+                        </div>
+                            
+                        </form>
+                    </div>
+                    <div class="message-in-row">
+
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="main-card mb-3 card">
+                                <div class="card-body">
+                                    <div class="card-title">
+                                        <div style="font-size: 30px;" class="row">
+                                            <div class="col-lg-6">Achats</div>
+                                        </div>
+    
+    
+                                    </div>
+    
+                                    <table class="mb-0 table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Numero Stock</th>
+                                                <th>Quantité</th>
+                                                <th>Date</th>
+                                                <th>TVA</th>
+                                                <th>Remise</th>
+                                                <th>Fournisseur</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% if(data.length == 0) {%>
+                                                <tr> <td style="text-align:center;" colspan="75%" >Table vide</td></tr>
+                                             <%} else {%>
+                                            <% for(let i=0;i < data.length; i++) {%>
+                                                <tr>
+                                                    <th scope='row'>
+                                                        <%=data[i].id_Achat%>
+                                                    </th>
+                                                    <td>
+                                                        <%=data[i].N_Stock%>
+                                                    </td>
+                                                    <td>
+                                                        <%=data[i].Quantite_Achat%>
+                                                    </td>
+                                                    <td>
+                                                        <%=data[i].Date_Achat%>
+                                                    </td>
+                                                    <td>
+                                                        <%=data[i].TVA_Achat%>%
+                                                    </td>
+                                                    <td>
+                                                        <%=data[i].Remise_Achat%>%
+                                                    </td>
+                                                    <td>
+                                                        <%=data[i].Code_fournisseur%>
+                                                    </td>
+                                                    <td style="text-align:center;">
+                                                        <div class='delete-btn' id="<%-data[i].id_Achat%>">
+                                                            <i class='fa fa-trash' aria-hidden='true'></i>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            <%}%>
+                                            <%}%>
+    
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+<script src="../static/js/achats.js"></script>
+<script src="../static/js/main.js"></script>
+</html>

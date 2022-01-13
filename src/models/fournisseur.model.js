@@ -23,13 +23,19 @@ module.exports = (sequelize, Sequelize) => {
       telephone_fournisseur: {
         type: String,
         required: true,
-        unique : true,
+        unique : {
+          args :true,
+        msg :"Invalid phone number"
+        }
       },
       email_fournisseur: {
         type: String,
         required: true,
         unique : true,
-        validate : {isEmail: true},
+        validate : {isEmail:  {
+          args :true,
+        msg :"Invalid email"
+        }},
       },
       createdAt : {
         type : Date,

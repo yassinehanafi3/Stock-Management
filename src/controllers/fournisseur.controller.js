@@ -7,7 +7,6 @@ exports.create = (req, res) => {
     res.status(400).send({
       message: "Content can not be empty!"
     });
-    return;
   }
   const fournisseur = {
     Societe_fournisseur: req.body.societe,
@@ -19,7 +18,6 @@ exports.create = (req, res) => {
 
   Fournisseur.create(fournisseur)
     .then(data => {
-      //req.flash("message","Client added");
       res.redirect("/fournisseurs");
     })
     .catch(err => {
@@ -57,6 +55,7 @@ exports.findAll = (req, res) => {
   if (req.isAuthenticated()) {
     console.log("authentified");
     Fournisseur.findAll({}).then(data => {
+      data.page_title = "Fournisseurs";
       data = { data }
       res.render("fournisseurs", data);
     })
@@ -89,3 +88,40 @@ exports.findByPk = (req, res) => {
       })
     })
 }
+
+exports.update = (req, res) => {
+  const id = req.params.Id;
+  let field = res.req.body.conceptName
+  if (field == "Societe_fournisseur"){
+    query = {"Societe_fournisseur":res.req.body.updatedValue}
+  }else if (field == "email_fournisseur"){
+				query = {"email_fournisseur":res.req.body.updatedValue}
+			}else if(field == "adresse_fournisseur") {
+				query = {"adresse_fournisseur":res.req.body.updatedValue}
+			}else if(field == "telephone_fournisseur") {
+				query = {"telephone_fournisseur":res.req.body.updatedValue}
+			}else if(field == "contact_fournisseur") {
+				query = {"contact_fournisseur":res.req.body.updatedValue}
+			}
+
+  Fournisseur.update(query, {
+    where: { Code_Fournisseur: id }
+  })
+    .then(data => {
+      if (data) {
+        res.send({
+          message: "Fournisseur was updated successfully."
+        });
+      } else {
+        res.send({
+          message: `Cannot update Fournisseur with id=${id}. Maybe Fournisseur was not found or req.body is empty!`
+        });
+      }
+    })
+    .catch(err => {
+      console.log(err.message)
+      res.send({
+        message: err.message
+      });
+    });
+};

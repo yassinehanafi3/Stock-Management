@@ -27,6 +27,7 @@ module.exports = (sequelize, Sequelize) => {
       Date_Achat : {
         type : Date,
         required: true,
+        default : Date.now,
       },
       Quantite_Achat : {
         type : Number,

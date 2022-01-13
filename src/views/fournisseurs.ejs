@@ -5,10 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Language" content="en">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Clients</title>
+    <title><%= data.page_title  %></title>
     <meta name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
-    <meta name="description" content="Tables are the backbone of almost all web applications.">
     <meta name="msapplication-tap-highlight" content="no">
     <link href="../static/css/main.css" rel="stylesheet">
     <link href="../static/css/fournisseurs.css" rel="stylesheet">
@@ -19,16 +18,14 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 
-    <script src="../static/js/fournisseurs.js"></script>
 </head>
 
 <body>
-    
     <div class="app-container">
         <%- include('./partials/header.ejs') %>
         <div class="app-main">
             <%- include('./partials/sidebar.ejs') %>
-            <div class="app-main__outer">
+            <div class="app-main__outer" style="background-color:aliceblue">
                 <div class="app-main__inner">
                     <div class="app-page-title">
                         <div class="page-title-wrapper">
@@ -51,7 +48,7 @@
                                         <div style="font-size: 30px;" class="row">
                                             <div class="col-lg-6">Fournisseurs</div>
                                             <div class="col-lg-6">
-                                                <div data-toggle="modal" data-target="#myModal" class="addClientButton"><i
+                                                <div data-toggle="modal" data-target="#myModal1"><i
                                                         style="float:right;margin-right: 30px;" class="fas fa-plus"></i>
                                                 </div>
                                             </div>
@@ -73,7 +70,9 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-    
+                                            <% if(data.length == 0) {%>
+                                                <tr> <td style="text-align:center;" colspan="75%" >Table vide</td></tr>
+                                             <%} else {%>
                                             <% for(let i=0;i < data.length; i++) {%>
                                                 <tr>
                                                     <th scope='row'>
@@ -98,8 +97,12 @@
                                                         <div class='delete-btn' id="<%-data[i].Code_fournisseur%>">
                                                             <i class='fa fa-trash' aria-hidden='true'></i>
                                                         </div>
+                                                        <div class='edit-btn' data-toggle="modal" data-target="#myModal2" id="<%-data[i].Code_fournisseur%>">
+                                                            <i class="fas fa-edit" aria-hidden='true'></i>
+                                                        </div>
                                                     </td>
                                                 </tr>
+                                            <%}%>
                                             <%}%>
     
                                         </tbody>
@@ -111,7 +114,7 @@
                 </div>
             </div>
         </div>
-        <div id="myModal" class="modal" tabindex="-1" role="dialog">
+        <div id="myModal1" class="modal" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <form action="/addfournisseur" method="post" style="width:100%;margin:auto">
@@ -149,8 +152,42 @@
                 </div>
             </div>
         </div>
+
+        <div id="myModal2" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <form style="width:100%;margin:auto">
+                        <div class="modal-body">
+                            <h2>Information à modifier</h2>
+                            <hr>
+                            <label for="fournisseur" class="">Valeur à modifier </label>
+                            <select class="form-control" id="fournisseur" name="fournisseur">
+                                <option value="societe">Societe</option>
+                                <option value="contact">Contact</option>
+                                <option value="email">Email</option>
+                                <option value="Adresse">Adresse</option>
+                                <option value="Telephone">Telephone</option>
+                            </select>
+                            <br>
+                                <label for="updatedValue" class="">Nouvelle valeur : </label>
+                                <input class="form-control" type="text" placeholder="" name="updatedValue" id="updatedValue">
+    
+                        </div>
+                        <div class="message" style="color:red">
+
+                        </div>
+                        <div class="modal-footer">
+                            <div id="save-edit-btn" class="btn btn-primary">Save changes</div>
+                            <button type="button" class="btn btn-secondary"
+                                data-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
     
 </body>
-
+<script src="../static/js/fournisseurs.js"></script>
+<script src="../static/js/main.js"></script>
 </html>

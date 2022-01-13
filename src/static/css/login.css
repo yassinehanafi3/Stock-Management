@@ -59,15 +59,6 @@ html {
     box-shadow: 0 0 2px 0px #323c4e;
 }
 
-.img-fluid {
-    padding: 15px;
-    border-bottom: 4px solid hsl(0, 100%, 40%);
-}
-
-.img-fluid {
-    margin-bottom: 15px;
-}
-
 #eye {
     position: absolute;
     right: 15px;

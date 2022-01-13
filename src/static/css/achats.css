@@ -1,0 +1,50 @@
+.save-btn {
+    width:10%;
+    float:right;
+}
+
+.row-form-achat {
+    margin-bottom: 20px;
+margin-left: 30px;
+margin-right: 30px;
+}
+
+
+.input-container {
+    display: -ms-flexbox; /* IE10 */
+    display: flex;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .icon {
+    padding: 10px;
+    background: dodgerblue;
+    color: white;
+    min-width: 50px;
+    text-align: center;
+  }
+  
+  .input-field {
+    width: 100%;
+    padding: 10px;
+    outline: none;
+  }
+  
+  .input-field:focus {
+    border: 2px solid dodgerblue;
+  }
+  
+  
+  .btn:hover {
+    opacity: 1;
+  }
+  
+  .fa, .fas{
+    font-size :30px;margin-right: 12px;
+  }
+
+  tr {
+    text-align:center;
+  }
+  
