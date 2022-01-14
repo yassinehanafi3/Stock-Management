@@ -28301,11 +28301,11 @@
           datasets: [{
               label: "Achats",
               backgroundColor: window.chartColors.red,
-              data: [a(), a(), a(), a(), a(), a(), a()]
+              data: [10, 4, 2, 4, 3, 8, 0]
           }, {
               label: "Ventes",
               backgroundColor: window.chartColors.blue,
-              data: [a(), a(), a(), a(), a(), a(), a()]
+              data: [5, 3, 1, 9, 5,2, 10]
           }]
       })
   window.onload = function() {

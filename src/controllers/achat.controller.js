@@ -135,3 +135,26 @@ exports.findByNumeroStock = (req, res) => {
     })
   })
 }
+
+exports.delete = (req, res) => {
+  const id = req.params.Id;
+  Achat.destroy({
+    where: { id_Achat: id }
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "Achat was deleted successfully!"
+        });
+      } else {
+        res.send({
+          message: `Cannot delete Achat with id=${id}. Maybe Achat was not found!`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Could not delete Achat with id=" + id
+      });
+    });
+};

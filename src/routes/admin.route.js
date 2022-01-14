@@ -5,7 +5,7 @@ module.exports = app => {
     var router = require("express").Router();
   
     router.post("/login",passport.authenticate('local', {
-      successRedirect: '/clients',
+      successRedirect: '/dashboard',
       failureRedirect: '/admin',
       failureFlash: true 
     }), admin.login);

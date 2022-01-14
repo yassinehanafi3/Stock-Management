@@ -4,7 +4,7 @@ $(".delete-btn").click(function () {
 			url: '/removeclient/'+ this.id,
 			type: 'DELETE',
 			success: function(result) {
-				if (result.message = "Client was deleted successfully!") window.location.replace("/clients");
+				if (result.message == "Client was deleted successfully!") window.location.replace("/clients");
 				else {
 					$(".message-in-row").append("&nbsp;&nbsp;&nbsp; Cannot delete client.");
 				}
